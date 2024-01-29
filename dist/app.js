@@ -22,7 +22,7 @@ const not_found_1 = require("./middleware/not-found");
 // security packages:
 const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const helmet_1 = __importDefault(require("helmet"));
-const xss_clean_1 = __importDefault(require("xss-clean"));
+// import xss from "xss-clean";
 const cors_1 = __importDefault(require("cors"));
 const express_mongo_sanitize_1 = __importDefault(require("express-mongo-sanitize"));
 const express_fileupload_1 = __importDefault(require("express-fileupload"));
@@ -51,7 +51,8 @@ app.set("set proxy", 1);
 app.use((0, express_rate_limit_1.default)({ windowMs: 15 * 60 * 1000, max: 60 }));
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)());
-app.use((0, xss_clean_1.default)());
+// doesent work for some reason
+// app.use(xss());
 app.use((0, express_mongo_sanitize_1.default)());
 // morgan logs a formatted http request line
 app.use((0, morgan_1.default)("tiny"));

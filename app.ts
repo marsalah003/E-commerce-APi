@@ -8,7 +8,8 @@ import { notFound } from "./middleware/not-found";
 // security packages:
 import rateLimiter from "express-rate-limit";
 import helmet from "helmet";
-import xss from "xss-clean";
+
+// import xss from "xss-clean";
 import cors from "cors";
 import mongoSanitize from "express-mongo-sanitize";
 import expressFileUpload from "express-fileupload";
@@ -53,7 +54,8 @@ app.set("set proxy", 1);
 app.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 60 }));
 app.use(helmet());
 app.use(cors());
-app.use(xss());
+// doesent work for some reason
+// app.use(xss());
 app.use(mongoSanitize());
 // morgan logs a formatted http request line
 app.use(morgan("tiny"));
