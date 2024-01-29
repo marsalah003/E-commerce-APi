@@ -25,6 +25,7 @@ const helmet_1 = __importDefault(require("helmet"));
 const xss_clean_1 = __importDefault(require("xss-clean"));
 const cors_1 = __importDefault(require("cors"));
 const express_mongo_sanitize_1 = __importDefault(require("express-mongo-sanitize"));
+const express_fileupload_1 = __importDefault(require("express-fileupload"));
 const cloudinary_1 = __importDefault(require("cloudinary"));
 // routers
 const authRoutes_1 = require("./routes/authRoutes");
@@ -48,7 +49,8 @@ cloudinary_1.default.v2.config({
 //security packages middlware
 app.set("set proxy", 1);
 app.use((0, express_rate_limit_1.default)({ windowMs: 15 * 60 * 1000, max: 60 }));
-app.use((0, helmet_1.default)(), app.use((0, cors_1.default)()));
+app.use((0, helmet_1.default)());
+app.use((0, cors_1.default)());
 app.use((0, xss_clean_1.default)());
 app.use((0, express_mongo_sanitize_1.default)());
 // morgan logs a formatted http request line
@@ -60,7 +62,7 @@ app.use(express_1.default.json());
 // parses cookies into req.signedCookies for incoming requests
 app.use((0, cookie_parser_1.default)(JWT_SECRET));
 // able to access files from req.files for incoming requests
-app.use(expressFileUpload({ useTempFiles: true }));
+app.use((0, express_fileupload_1.default)({ useTempFiles: true }));
 app.use("/api/v1/auth", authRoutes_1.authRouter);
 app.use("/api/v1/users", full_auth_1.authenticateUser, userRoutes_1.userRouter);
 app.use("/api/v1/products", productRoutes_1.productRouter);

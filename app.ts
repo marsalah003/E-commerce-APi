@@ -11,6 +11,7 @@ import helmet from "helmet";
 import xss from "xss-clean";
 import cors from "cors";
 import mongoSanitize from "express-mongo-sanitize";
+import expressFileUpload from "express-fileupload";
 
 import {} from "express-rate-limit";
 import cloudinary from "cloudinary";
@@ -50,10 +51,10 @@ cloudinary.v2.config({
 //security packages middlware
 app.set("set proxy", 1);
 app.use(rateLimiter({ windowMs: 15 * 60 * 1000, max: 60 }));
-app.use(helmet()
-app.use(cors()))
-app.use(xss())
-app.use(mongoSanitize())
+app.use(helmet());
+app.use(cors());
+app.use(xss());
+app.use(mongoSanitize());
 // morgan logs a formatted http request line
 app.use(morgan("tiny"));
 // lets us be able to serve our default images
